@@ -1,3 +1,4 @@
+import React from "react"
 
 export const UserList = ({users}) => {
 
@@ -16,7 +17,7 @@ export const UserList = ({users}) => {
                 <th>Email</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody data-testid="users">
             {renderedUsers}
         </tbody>
     </table>
