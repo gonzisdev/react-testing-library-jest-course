@@ -1,14 +1,14 @@
-import { render, screen } from "@testing-library/react"
+import { render, screen, act } from "@testing-library/react"
 import { MemoryRouter } from "react-router"
 import RepositoriesListItem from "./RepositoriesListItem"
 
-jest.mock('../tree/FileIcon', () => {
-
-    // Content of FileIcon.js
-    return () => {
-        return 'File Icon Component' //<- NOW IT WILL RENDER THIS INSTEAD OF THE COMPONENT
-    }
-})
+// GOOD IDEA IF A COMPONENT IS CAUSING TROUBLE WITHIN A COMPONENT WE ARE TESTING 
+// jest.mock('../tree/FileIcon', () => {
+//     // Content of FileIcon.js
+//     return () => {
+//         return 'File Icon Component' //<- NOW IT WILL RENDER THIS INSTEAD OF THE COMPONENT
+//     }
+// })
 
 function renderComponent() {
     const repository = {
@@ -28,8 +28,13 @@ function renderComponent() {
 
 test('shows a link to the github homepage for this repository', async () => {
     renderComponent()
-    // await screen.findByRole('img', {name: 'Javascript'})
-    
+    await screen.findByRole('img', {name: 'Javascript'})
+    // screen.debug()
+
+    // TRY NOT TO USE THIS SOLUTION
+    // await act(async () => {
+    //     await pause()
+    // })
 
 })
 
@@ -41,11 +46,3 @@ test('shows a link to the github homepage for this repository', async () => {
 //     })
 // }
 
-// act:
-// it('Should return some text', () => {
-//     act(() => {
-//       render(<TestComponent />, container);
-//     });
-  
-//     expect(container.textContent).toBe('some text');
-//   })
