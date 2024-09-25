@@ -51,3 +51,9 @@ test('shows a link to the github homepage for this repository', async () => {
 //     })
 // }
 
+
+test('shows a fileicon with the appropiate icon', async () => {
+    renderComponent()
+    await screen.findByRole('img', {name: 'Javascript'})
+    expect(icon).toHaveClass('js-icon')
+})
