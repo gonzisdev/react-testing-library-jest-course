@@ -1,7 +1,6 @@
 import React from "react"
 import { render, screen, within } from "@testing-library/react"
 import '@testing-library/jest-dom'
-import user from "@testing-library/user-event"
 import { UserList } from "./UserList"
 
 function renderrComponent() {
