@@ -4,13 +4,20 @@ import '@testing-library/jest-dom'
 import user from "@testing-library/user-event"
 import { UserList } from "./UserList"
 
-test('render the correct number of rows', () => {
+function renderrComponent() {
     const users = [
         {name: 'jane', email: 'jane@jane.com'},
         {name: 'sam', email: 'sam@sam.com'}
     ]
-    //const { container } = render(<UserList users={users} />)
     render(<UserList users={users} />)
+    return {
+        users
+    }
+}
+
+test('render the correct number of rows', () => {
+    renderrComponent()
+    //const { container } = render(<UserList users={users} />)
 
     const rows = within(screen.getByTestId('users')).getAllByRole('row') // Preferable
     // const table = container.querySelector('table')
@@ -21,11 +28,8 @@ test('render the correct number of rows', () => {
 })
 
 test('render the email and name of each user', () => {
-    const users = [
-        {name: 'jane', email: 'jane@jane.com'},
-        {name: 'sam', email: 'sam@sam.com'}
-    ]
-    render(<UserList users={users} />)
+    const { users } = renderrComponent()
+    
     //screen.logTestingPlaygroundURL()
     for(let user of users) {
         const name = screen.getByRole('cell', { name: user.name })
